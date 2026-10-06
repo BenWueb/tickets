@@ -24,6 +24,9 @@
 .DS_Store
 *.pem
 
+# local auth database
+sqlite.db
+
 # debug
 npm-debug.log*
 yarn-debug.log*

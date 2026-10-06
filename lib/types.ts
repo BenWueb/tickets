@@ -11,6 +11,9 @@ export interface Ticket {
   section?: string;
   seat?: string;
   notes?: string;
+  address?: string;
+  lat?: number;
+  lon?: number;
   createdAt: string; // ISO
 }
 

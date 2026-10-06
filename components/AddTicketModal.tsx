@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useId, useRef, useState, type FormEvent, type ReactNode } from "react";
+import { AddressAutocomplete } from "@/components/AddressAutocomplete";
 import type { EventType, TicketInput } from "@/lib/types";
 
 interface AddTicketModalProps {
@@ -73,6 +74,10 @@ function AddTicketForm({
   const [section, setSection] = useState("");
   const [seat, setSeat] = useState("");
   const [notes, setNotes] = useState("");
+  const [address, setAddress] = useState("");
+  const [coords, setCoords] = useState<{ lat: number; lon: number } | null>(
+    null,
+  );
   const firstFieldRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -95,6 +100,9 @@ function AddTicketForm({
       section: section.trim() || undefined,
       seat: seat.trim() || undefined,
       notes: notes.trim() || undefined,
+      address: address.trim() || undefined,
+      lat: coords?.lat,
+      lon: coords?.lon,
     });
     onClose();
   }
@@ -191,6 +199,21 @@ function AddTicketForm({
           />
         </Field>
       </div>
+
+      <Field label="Address (optional)">
+        <AddressAutocomplete
+          value={address}
+          onChange={(text) => {
+            setAddress(text);
+            setCoords(null); // typed text no longer matches a picked suggestion
+          }}
+          onSelect={(s) => {
+            setAddress(s.displayName);
+            setCoords({ lat: s.lat, lon: s.lon });
+          }}
+          placeholder="Start typing the venue address…"
+        />
+      </Field>
 
       <Field label="Notes (optional)">
         <input
