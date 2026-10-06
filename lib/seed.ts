@@ -1,0 +1,57 @@
+import type { Ticket } from "./types";
+
+export const SEED_TICKETS: Ticket[] = [
+  {
+    id: "seed-1",
+    eventName: "John Mulaney",
+    type: "comedy",
+    venue: "Chicago Theatre",
+    city: "Chicago, IL",
+    date: "2026-10-18",
+    time: "20:00",
+    section: "Orchestra",
+    seat: "G-12",
+    notes: "From Scratch tour",
+    createdAt: "2026-09-01T12:00:00.000Z",
+  },
+  {
+    id: "seed-2",
+    eventName: "Tame Impala",
+    type: "concert",
+    venue: "United Center",
+    city: "Chicago, IL",
+    date: "2026-11-02",
+    time: "19:30",
+    section: "Floor",
+    seat: "GA",
+    notes: "Deadbeat tour",
+    createdAt: "2026-09-05T12:00:00.000Z",
+  },
+  {
+    id: "seed-3",
+    eventName: "Ali Wong",
+    type: "comedy",
+    venue: "The Fillmore",
+    city: "San Francisco, CA",
+    date: "2026-12-05",
+    time: "19:00",
+    section: "Balcony",
+    seat: "B-8",
+    createdAt: "2026-09-10T12:00:00.000Z",
+  },
+  {
+    id: "seed-4",
+    eventName: "The Weeknd",
+    type: "concert",
+    venue: "Soldier Field",
+    city: "Chicago, IL",
+    date: "2027-06-14",
+    time: "20:00",
+    section: "Lower Bowl",
+    seat: "112-R14",
+    notes: "After Hours Til Dawn",
+    createdAt: "2026-09-15T12:00:00.000Z",
+  },
+];
+
+export const STORAGE_KEY = "show-tickets-v1";

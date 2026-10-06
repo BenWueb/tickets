@@ -1,0 +1,128 @@
+@import "tailwindcss";
+
+:root {
+  --background: #070709;
+  --foreground: #ededed;
+  --ticket-paper: #f4efe4;
+  --ticket-paper-deep: #ebe4d4;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-display);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+}
+
+.font-display {
+  font-family: var(--font-display), var(--font-geist-sans), system-ui, sans-serif;
+}
+
+/* Cream paper stock for physical ticket stubs */
+.ticket-paper {
+  background-color: var(--ticket-paper);
+  background-image:
+    linear-gradient(
+      165deg,
+      rgba(255, 252, 245, 0.9) 0%,
+      transparent 42%,
+      rgba(210, 195, 160, 0.18) 100%
+    );
+}
+
+.ticket-stub {
+  background-color: var(--ticket-paper-deep);
+  border-left: 1px solid rgba(26, 22, 18, 0.06);
+}
+
+/* Subtle paper grain / noise via layered CSS (no image assets) */
+.ticket-grain {
+  opacity: 0.55;
+  mix-blend-mode: multiply;
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(26, 22, 18, 0.015) 2px,
+      rgba(26, 22, 18, 0.015) 3px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 3px,
+      rgba(26, 22, 18, 0.012) 3px,
+      rgba(26, 22, 18, 0.012) 4px
+    ),
+    radial-gradient(
+      circle at 20% 30%,
+      rgba(140, 110, 70, 0.06) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 70%,
+      rgba(160, 130, 90, 0.05) 0%,
+      transparent 45%
+    );
+}
+
+/* Ticket perforated edge: circular punch holes cut through to dark page */
+.ticket-perf::before,
+.ticket-perf::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  width: 16px;
+  height: 16px;
+  border-radius: 9999px;
+  background: var(--background);
+  transform: translateX(-50%);
+  z-index: 4;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15);
+}
+
+.ticket-perf::before {
+  top: -8px;
+}
+
+.ticket-perf::after {
+  bottom: -8px;
+}
+
+.ticket-card {
+  isolation: isolate;
+}
+
+.field-input {
+  width: 100%;
+  border-radius: 0.75rem;
+  border: 1px solid rgb(63 63 70);
+  background: rgb(24 24 27 / 0.8);
+  padding: 0.625rem 0.875rem;
+  font-size: 0.875rem;
+  color: white;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.field-input::placeholder {
+  color: rgb(113 113 122);
+}
+
+.field-input:focus {
+  border-color: rgb(244 114 182 / 0.5);
+  box-shadow: 0 0 0 3px rgb(244 114 182 / 0.15);
+}
+
+/* Native date/time inputs in dark UI */
+.field-input[type="date"],
+.field-input[type="time"] {
+  color-scheme: dark;
+}
